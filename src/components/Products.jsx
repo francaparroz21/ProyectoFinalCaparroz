@@ -1,20 +1,22 @@
 import { Navbar } from "./Navbar";
 import { db } from "../firebaseConfig/firebase";
 import { useEffect, useState } from "react";
-import { collection,  getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { ItemProduct } from "./Item";
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export const Products = () => {
     //Hook useState
     const [products, setProducts] = useState([])
 
     //Collection reference
-    const productsCollection = collection(db,"bossyProducts")
+    const productsCollection = collection(db, "bossyProducts")
 
     //GET products function
-    const getProducts = async () =>{
+    const getProducts = async () => {
         const data = await getDocs(productsCollection)
-        setProducts(data.docs.map((product)=>({...product.data(), id: product.id})))
+        setProducts(data.docs.map((product) => ({ ...product.data(), id: product.id })))
     }
 
     useEffect(() => {
@@ -24,9 +26,14 @@ export const Products = () => {
     return (
         <>
             <Navbar />
+            <div>
+                <Button href="/create">
+                    Create a product.
+                </Button>
+            </div>
             <div className="cardsContainer">
-                {products.map((product)=>{
-                    return(<ItemProduct key={product.id} product={product}/>);
+                {products.map((product) => {
+                    return (<ItemProduct key={product.id} product={product} />);
                 })}
             </div>
         </>
