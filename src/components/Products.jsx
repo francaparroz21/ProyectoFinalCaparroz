@@ -5,6 +5,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { ItemProduct } from "./Item";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import {Footer} from "./Footer"
 
 export const Products = () => {
     //Hook useState
@@ -38,6 +39,7 @@ export const Products = () => {
                     return (<ItemProduct key={product.id} product={product} />);
                 })}
             </div>
+            <Footer/>
         </>
     );
 }

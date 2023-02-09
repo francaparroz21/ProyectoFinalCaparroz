@@ -52,7 +52,7 @@ export const Create = () => {
     return (
         <>
             <Navbar />
-            <Form onSubmit={postProduct}>
+            <Form className="form-create-product" onSubmit={postProduct}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Name Product</Form.Label>
                     <Form.Control onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="Example: Idraet Serum" />

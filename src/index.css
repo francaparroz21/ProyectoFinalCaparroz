@@ -79,9 +79,9 @@
   padding: 8px;
 }
 
-.app {
+.main-home,.footer-home {
   font-family: 'Rubik', sans-serif;
-  background: linear-gradient(rgba(20, 7, 12, 0.75), rgba(20, 7, 12, 0.75)), url(../public/images/background_eyebrow.PNG) no-repeat center center fixed;
+  background: linear-gradient(rgba(20, 7, 12, 0.75), rgba(20, 7, 12, 0.75)), url("https://firebasestorage.googleapis.com/v0/b/bossyapp-54cf2.appspot.com/o/backgroundHome%2Fbackground_eyebrow.PNG?alt=media&token=8ce410cc-d58b-4c64-b140-3ec0ea13bec4") no-repeat center center fixed;
   color: var(--blanco);
   background-size: cover;
 }
@@ -207,4 +207,12 @@ footer {
 .create-product{
   display: flex;
   justify-content: center;
+}
+
+.form-create-product{
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  margin: auto;
 }
