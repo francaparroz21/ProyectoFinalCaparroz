@@ -4,7 +4,7 @@ import { ItemCount } from './ItemCount';
 export const ItemProduct=({product}) =>{
     return (
         <Card style={{ width: '18rem' }}>
-            <Card.Img variant="top" src={process.env.PUBLIC_URL+"/images/"+product.urlImg} />
+            <Card.Img variant="top" src={product.urlImg} />
             <Card.Body>
                 <Card.Title>{product.name}</Card.Title>
                 <Card.Text>

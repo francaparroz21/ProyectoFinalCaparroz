@@ -27,9 +27,11 @@ export const Products = () => {
         <>
             <Navbar />
             <div>
-                <Button href="/create">
-                    Create a product.
-                </Button>
+                <Link to={"/create"}>
+                    <Button>
+                        Create a product.
+                    </Button>
+                </Link>
             </div>
             <div className="cardsContainer">
                 {products.map((product) => {

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CartWidget from "./CartWidget"
 
 export const Navbar = () => {
@@ -6,12 +7,12 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-md">
                 <div className="navbar-left">
                     <div>
-                        <a className="nav-link" href="./"><img src={process.env.PUBLIC_URL + "/images/Bossy2.png"} alt="" /></a>
+                        <Link className="nav-link" to={"/"}><img src={process.env.PUBLIC_URL + "/images/Bossy2.png"} alt="" /></Link>
                     </div>
                     <div className="collapse navbar-collapse" id="options">
                         <ul className="navbar-nav">
-                            <li className="nav-item"><a className="nav-link" href="./">Inicio</a></li>
-                            <li className="nav-item"><a className="nav-link" href="./products">Productos</a></li>
+                            <Link className="nav-item" to={"/"}>Inicio</Link>
+                            <Link className="nav-item" to={"/products"}>Productos</Link>
                         </ul>
                     </div>
                 </div>
