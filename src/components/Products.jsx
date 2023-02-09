@@ -26,7 +26,7 @@ export const Products = () => {
     return (
         <>
             <Navbar />
-            <div>
+            <div className="create-product">
                 <Link to={"/create"}>
                     <Button>
                         Create a product.
