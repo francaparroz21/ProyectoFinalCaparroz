@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import CartWidget from "./CartWidget"
 
 export const Navbar = () => {
@@ -11,8 +11,8 @@ export const Navbar = () => {
                     </div>
                     <div className="collapse navbar-collapse" id="options">
                         <ul className="navbar-nav">
-                            <Link className="nav-item" to={"/"}>Inicio</Link>
-                            <Link className="nav-item" to={"/products"}>Productos</Link>
+                            <NavLink className="nav-item" to={"/"}>Inicio</NavLink>
+                            <NavLink className="nav-item" to={"/category/products"}>Productos</NavLink>
                         </ul>
                     </div>
                 </div>
