@@ -1,7 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Home } from './components/Home';
-import { Products } from './components/Products';
 import { Create } from './components/Create';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { ItemListContainer } from './components/ItemListContainer';
@@ -11,7 +10,6 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<ItemListContainer/>}></Route>
-        <Route path='/products' element={<Products/>}></Route>
         <Route path='/category/:id' element={<ItemListContainer/>}></Route>
         <Route path='/create' element={<Create/>}></Route>
         <Route path='/item/:id' element={<ItemDetailContainer/>}></Route>

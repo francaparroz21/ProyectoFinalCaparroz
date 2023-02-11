@@ -10,6 +10,7 @@ import { storage } from "../firebaseConfig/firebase";
 
 export const Create = () => {
     const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
     const [name, setName] = useState("")
     const [price, setPrice] = useState("")
     const [stock, setStock] = useState(0)
@@ -25,21 +26,22 @@ export const Create = () => {
     const postProduct = async (e) => {
         e.preventDefault()
         const urlImg = await uploadImage(img)
-        
+
         await addDoc(productsCollection, {
             name: name,
             description: description,
             stock: stock,
+            category: category,
             price: price,
             urlImg: urlImg
         })
-        navigate("/products")
+        navigate("/")
     }
 
     //Upluad Image
     const uploadImage = async (image) => {
         //referencia de storage
-        const storageRef = ref(storage, "productsImages/"+image.name)
+        const storageRef = ref(storage, "productsImages/" + image.name)
 
         //funcion que sube la imagen al storage
         await uploadBytes(storageRef, image)
@@ -53,8 +55,9 @@ export const Create = () => {
         <>
             <Navbar />
             <Form className="form-create-product" onSubmit={postProduct}>
+                <h2 className="createProductTitle">Create a product</h2>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Name Product</Form.Label>
+                    <Form.Label>Name</Form.Label>
                     <Form.Control onChange={(e) => setName(e.target.value)} value={name} type="text" placeholder="Example: Idraet Serum" />
                 </Form.Group>
 
@@ -72,12 +75,19 @@ export const Create = () => {
                     <Form.Control onChange={(e) => setStock(e.target.value)} value={stock} type="number" placeholder="Example: '4'." />
                 </Form.Group>
 
+                <Form.Group className="mb-3" controlId="formBasicCategory">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Select onChange={(e)=>{setCategory(e.target.value)}}>
+                        <option >Cosmetic</option>
+                        <option >Makeup</option>
+                    </Form.Select>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicImage">
                 <Form.Label>Upload Image</Form.Label>
                 <Form.Control onChange={(e) => setImg(e.target.files[0])} type="file" />
-
-                <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Check me out" />
                 </Form.Group>
+
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>

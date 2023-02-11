@@ -1,32 +1,39 @@
 import { useState, useEffect } from "react";
-import { arregloProductos } from "../../baseDatos/baseDatos";
-import { ItemDetail } from "../ItemDetail/ItemDetail";
 import { useParams } from "react-router-dom";
+import { db } from "../firebaseConfig/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { Item } from "./Item";
 
-export const ItemDetailContainer = ()=>{
-    const {id} = useParams();
+export const ItemDetailContainer = () => {
 
+    // useParams /item/:id
+    const { productId } = useParams();
+
+    //Hook useState item
     const [item, setItem] = useState({});
 
-    const getItem = (id)=>{
-        return new Promise((resolve, reject)=>{
-            const product = arregloProductos.find(item=>item.id === parseInt(id));
-            resolve(product)
-        })
+    //Collection reference
+    const productsCollection = db.collection("bossyProducts").get()
+
+    
+    const getItem = async (id) => {
+        const data = await getDocs(productsCollection)
+        data.docs.map((product) => { console.log(product) })
     }
+    
 
-    useEffect(()=>{
-        const getProducto = async()=>{
-            const producto = await getItem(productId);
-            setItem(producto);
-        }
-        getProducto();
-    },[productId])
+    useEffect(() => {
+        getItem(productId)
+    }, [productId])
 
-    return(
+
+    return (
         <div className="item-detail-container">
-            <p style={{width:"100%", color: "white"}}>item detail container</p>
-            <ItemDetail item={item}/>
+            {
+                productsCollection.forEach((doc) => {
+                    console.log(doc);
+                  })
+            }
         </div>
     )
 }

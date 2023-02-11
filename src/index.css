@@ -73,6 +73,7 @@
 .toaddcart {
   display: flex;
   justify-content: space-between;
+  padding: 5px;
 }
 
 .item-count>* {
@@ -215,4 +216,11 @@ footer {
   display: flex;
   flex-flow: column;
   margin: auto;
+}
+
+.see-more{
+  text-align: center;
+}
+.createProductTitle{
+  text-align: center;
 }
