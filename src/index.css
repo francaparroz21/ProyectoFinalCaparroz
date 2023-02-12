@@ -125,6 +125,10 @@
   padding: 15px;
 }
 
+.card-img-top{
+  width: auto;
+}
+
 .cardsContainer>div {
   padding: 10px;
 }
@@ -175,9 +179,6 @@ footer div a img:hover {
   grid-column: 1/5;
   grid-row: 3/5;
 }
-
-
-
 
 footer div a img {
   width: 30px;

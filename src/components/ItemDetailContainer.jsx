@@ -5,6 +5,7 @@ import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { Navbar } from "./Navbar";
 import { ItemCount } from "./ItemCount";
 import { Button } from "react-bootstrap";
+import { Footer } from "./Footer";
 
 
 
@@ -41,6 +42,7 @@ export const ItemDetailContainer = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </>
     )
 }

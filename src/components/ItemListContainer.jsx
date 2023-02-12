@@ -1,6 +1,6 @@
 import { Navbar } from "./Navbar"
-import { getDocs, collection } from "firebase/firestore"
-import { db } from "../firebaseConfig/firebase"
+import { getDocs, collection,where,query } from "firebase/firestore"
+import { db} from "../firebaseConfig/firebase"
 import { Footer } from "./Footer"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -11,22 +11,22 @@ import { ItemList } from "./ItemList"
 
 export const ItemListContainer = () => {
 
-    const { category } = useParams()
+    //Params category id
+    const { id } = useParams()
     //Hook useState
     const [products, setProducts] = useState([])
 
-    //Collection reference
-    const productsCollection = collection(db, "bossyProducts")
-
-    //GET products function
-    const getProducts = async () => {
-        const data = await getDocs(productsCollection)
-        setProducts(data.docs.map((product) => ({ ...product.data(), id: product.id })))
-    }
 
     useEffect(() => {
-        getProducts()
-    }, [category])
+        const productsCollection = collection(db, "bossyProducts")
+        if (id) {
+            const filter = query(productsCollection, where("category", "==", id))
+            getDocs(filter).then(res => setProducts(res.docs.map(product => ({ id: product.id, ...product.data() }))))
+        } else {
+            getDocs(productsCollection).then(res => setProducts(res.docs.map(product => ({ id: product.id, ...product.data() }))))
+        }
+    }, [id])
+
 
     return (
         <>

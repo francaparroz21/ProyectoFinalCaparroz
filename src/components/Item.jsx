@@ -12,8 +12,6 @@ export const Item = ({ product }) => {
                 <Card.Text>
                     {product.description}
                 </Card.Text>
-                <span>Stock disponible: {product.stock}</span>
-                <ItemCount stockProduct={product.stock} />
                 <div className='see-more'>
                     <Link to={`/item/${product.id}`}>
                         <Button className='btn btn-primary see-more'>Ver más</Button>
