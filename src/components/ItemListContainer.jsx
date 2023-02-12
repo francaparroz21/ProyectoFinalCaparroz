@@ -1,13 +1,17 @@
 import { Navbar } from "./Navbar"
-import { getDocs,collection } from "firebase/firestore"
+import { getDocs, collection } from "firebase/firestore"
 import { db } from "../firebaseConfig/firebase"
 import { Footer } from "./Footer"
-import { Item } from "./Item"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
-import { useState,useEffect } from "react"
+import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
+
+import { ItemList } from "./ItemList"
 
 export const ItemListContainer = () => {
+
+    const { category } = useParams()
     //Hook useState
     const [products, setProducts] = useState([])
 
@@ -19,9 +23,10 @@ export const ItemListContainer = () => {
         const data = await getDocs(productsCollection)
         setProducts(data.docs.map((product) => ({ ...product.data(), id: product.id })))
     }
+
     useEffect(() => {
         getProducts()
-    }, [])
+    }, [category])
 
     return (
         <>
@@ -33,10 +38,8 @@ export const ItemListContainer = () => {
                     </Button>
                 </Link>
             </div>
-            <div className="cardsContainer">
-                {products.map((product) => {
-                    return (<Item key={product.id} product={product} />);
-                })}
+            <div>
+                <ItemList products={products}></ItemList>
             </div>
             <Footer />
         </>

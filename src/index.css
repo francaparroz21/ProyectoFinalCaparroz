@@ -70,9 +70,10 @@
   align-items: center;
 }
 
-.toaddcart {
+.add-tocart {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 15px;
   padding: 5px;
 }
 
@@ -223,4 +224,25 @@ footer {
 }
 .createProductTitle{
   text-align: center;
+}
+
+.item-detail-container{
+  background-color: #DEDEDE;
+}
+
+.title-detail-container{
+  text-align: center;
+}
+
+.img-detail-container{
+  width: 400px;
+}
+
+.display-detail-container{display: flex;}
+
+
+.display-right-detail-container{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
 }

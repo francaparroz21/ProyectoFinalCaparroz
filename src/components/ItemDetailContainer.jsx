@@ -1,39 +1,46 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../firebaseConfig/firebase";
-import { collection, getDocs } from "firebase/firestore";
-import { Item } from "./Item";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { Navbar } from "./Navbar";
+import { ItemCount } from "./ItemCount";
+import { Button } from "react-bootstrap";
+
+
 
 export const ItemDetailContainer = () => {
 
-    // useParams /item/:id
-    const { productId } = useParams();
-
     //Hook useState item
-    const [item, setItem] = useState({});
-
-    //Collection reference
-    const productsCollection = db.collection("bossyProducts").get()
-
-    
-    const getItem = async (id) => {
-        const data = await getDocs(productsCollection)
-        data.docs.map((product) => { console.log(product) })
-    }
-    
+    const [data, setData] = useState({});
+    // useParams /item/:id
+    const { id } = useParams()
 
     useEffect(() => {
-        getItem(productId)
-    }, [productId])
+        const queryDb = getFirestore()
+        const docRef = doc(queryDb, "bossyProducts", id)
+        getDoc(docRef)
+            .then(res => setData({ id: res.id, ...res.data() }))
+    }, [id])
 
 
     return (
-        <div className="item-detail-container">
-            {
-                productsCollection.forEach((doc) => {
-                    console.log(doc);
-                  })
-            }
-        </div>
+        <>
+            <Navbar />
+            <div className="item-detail-container container">
+                <h3 className="title-detail-container">{data.name}</h3>
+
+                <div className="display-detail-container">
+                    <img className="img-detail-container" src={data.urlImg} alt={data.name} />
+                    <div className="display-right-detail-container">
+                        <p>{data.description}</p>
+                        <span>Stock disponible: {data.stock}</span>
+                        <div className='add-tocart'>
+                            <ItemCount stockProduct={data.stock} />
+                            <Button variant="success" title="Add to Cart" >Add to cart</Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }

@@ -15,9 +15,6 @@ export const ItemCount = ({stockProduct}) => {
                     setCount(count + 1)
                 }}}>+</Button>
             </div>
-            <div className='add-tocart'>
-                <Button variant="success" title="Add to Cart" >Add to cart</Button>
-            </div>
         </div>
     )
 }
