@@ -1,6 +1,6 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Home } from './components/Home';
+import { Aboutme } from './components/Aboutme';
 import { Create } from './components/Create';
 import { ItemDetailContainer } from './components/ItemDetailContainer';
 import { ItemListContainer } from './components/ItemListContainer';
@@ -13,6 +13,7 @@ function App() {
         <Route path='/category/:id' element={<ItemListContainer/>}></Route>
         <Route path='/create' element={<Create/>}></Route>
         <Route path='/item/:id' element={<ItemDetailContainer/>}></Route>
+        <Route path='/aboutme' element={<Aboutme/>}></Route>
       </Routes>
     </BrowserRouter> 
   );

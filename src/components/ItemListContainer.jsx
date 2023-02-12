@@ -1,6 +1,6 @@
 import { Navbar } from "./Navbar"
-import { getDocs, collection,where,query } from "firebase/firestore"
-import { db} from "../firebaseConfig/firebase"
+import { getDocs, collection, where, query } from "firebase/firestore"
+import { db } from "../firebaseConfig/firebase"
 import { Footer } from "./Footer"
 import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
@@ -15,6 +15,12 @@ export const ItemListContainer = () => {
     const { id } = useParams()
     //Hook useState
     const [products, setProducts] = useState([])
+
+    //Funcion para printear cuando se ingresa un categoryId distinto
+    const categoryNotFound = () => {
+        if(products.length !== 0) return <ItemList products={products}/>
+        else return <h2>404. Category not found.</h2>
+    }
 
 
     useEffect(() => {
@@ -39,7 +45,8 @@ export const ItemListContainer = () => {
                 </Link>
             </div>
             <div>
-                <ItemList products={products}></ItemList>
+                {categoryNotFound()}
+
             </div>
             <Footer />
         </>

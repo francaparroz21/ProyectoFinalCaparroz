@@ -1,7 +1,7 @@
 import { Footer } from "./Footer"
 import { Navbar } from "./Navbar"
 
-export const Home = () => {
+export const Aboutme = () => {
     return (
         <div>
             <Navbar />

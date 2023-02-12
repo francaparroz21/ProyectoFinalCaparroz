@@ -13,6 +13,7 @@ export const Navbar = () => {
                         <ul className="navbar-nav">
                             <NavLink className="nav-item" to={"/category/Cosmetic"}>Cosmetics</NavLink>
                             <NavLink className="nav-item" to={"/category/Makeup"}>Makeup</NavLink>
+                            <NavLink className="nav-item" to={"/Aboutme"}>About Me</NavLink>
                         </ul>
                     </div>
                 </div>
