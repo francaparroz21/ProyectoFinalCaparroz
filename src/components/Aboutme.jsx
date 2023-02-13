@@ -49,7 +49,7 @@ export const Aboutme = () => {
                             <img src={process.env.PUBLIC_URL + "/images/makeup_photo.PNG"} alt="makeup" />
                         </div>
                         <div className="banner">
-                            <img src={process.env.PUBLIC_URL + "/images/banner.PNG"} alt="banner" />
+                            <img src={process.env.PUBLIC_URL + "/images/banner.png"} alt="banner" />
 
                         </div>
                     </div>
