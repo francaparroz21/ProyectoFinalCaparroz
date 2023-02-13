@@ -7,7 +7,7 @@ import { ItemListContainer } from './components/ItemListContainer';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
         <Route path='/' element={<ItemListContainer/>}></Route>
         <Route path='/category/:id' element={<ItemListContainer/>}></Route>
