@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+
+/* Variables */
+:root {
+  /* Paleta */
+  --purpura: #A269E6;
+  --naranja: #BA4A00;
+  --blanco: #C8C8D3;
+  --azul: #356A96;
+  --negro: #181B1D;
+  --rosa: #E9C1F1;
+  --cinderella: #fbcbcc;
+  --lavender-gray: #bcbcdb;
+  --sweet-pink: #fb9cac;
+  --cinderella: #fcdfe0;
+  --melanie: #e0c3d3;
+  --melanie: #e3c6dc;
+  --melon: #fcb4b4;
+  --wisp-pink: #fce4ec;
+  --linen: #fcf2f2;
+}
+
+/* Normalize */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+/* NAVBAR  */
+.navbar a {
+  text-decoration: none;
+  color: var(--negro);
+}
+
+.navbar li {
+  list-style-type: none;
+  width: auto;
+}
+
+.cart-widget {
+  display: flex;
+}
+
+.countCart {
+  margin: auto;
+  display: inline;
+  color: #8699A5;
+  font-size: 2em;
+}
+
+.nav-item {
+  padding: 10px;
+}
+
+.navbar {
+  justify-content: space-between;
+  background-color: var(--linen);
+}
+
+.navbar .navbar-left a img {
+  max-width: 80px;
+  min-width: 80px;
+  margin-right: 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.add-tocart {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 5px;
+}
+
+.item-count>* {
+  padding: 8px;
+}
+
+.main-home,.footer-home {
+  font-family: 'Rubik', sans-serif;
+  background: linear-gradient(rgba(20, 7, 12, 0.75), rgba(20, 7, 12, 0.75)), url("https://firebasestorage.googleapis.com/v0/b/bossyapp-54cf2.appspot.com/o/backgroundHome%2Fbackground_eyebrow.PNG?alt=media&token=8ce410cc-d58b-4c64-b140-3ec0ea13bec4") no-repeat center center fixed;
+  color: var(--blanco);
+  background-size: cover;
+}
+
+.navbar .navbar-left a:hover {
+  color: green;
+  transition: all .3s ease-in-out, color .3s ease-in-out;
+}
+
+.navbar .navbar-left a {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.navbar .navbar-right img {
+  width: 50px;
+
+}
+
+.navbar .navbar-right a {
+  padding: 10px;
+  border-radius: 28px;
+}
+
+.navbar .navbar-right a:hover {
+  transition: all 0.5s;
+  background-color: hwb(0 62% 38%);
+}
+
+.itemListContainerTittle {
+  text-align: center;
+}
+
+.cardsContainer {
+  display: flex;
+  justify-content:space-around;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 15px;
+}
+
+.card-img-top{
+  width: auto;
+}
+
+.cardsContainer>div {
+  padding: 10px;
+}
+
+footer div a {
+  width: 80px;
+  padding: 5px;
+  overflow: hidden;
+}
+
+footer {
+  padding: 25px;
+}
+
+footer div a img:hover {
+  -webkit-transform: scale(1.5);
+  transform: scale(1.5);
+  transition: 0.4s;
+}
+
+.homeImages img {
+  width: 100%;
+  height: auto;
+}
+
+.homeImages {
+  display: grid;
+  grid-area: "makeupme makeupme makeupPhoto makeupPhoto"
+    "banner banner banner banner";
+  grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(4, auto);
+}
+
+.makeupMe {
+  grid-area: makeupme;
+  grid-column: 1/3;
+  grid-row: 1/3;
+}
+
+.makeupPhoto {
+  grid-area: makeupPhoto;
+  grid-column: 3/5;
+  grid-row: 1/3;
+}
+
+.banner {
+  grid-area: banner;
+  grid-column: 1/5;
+  grid-row: 3/5;
+}
+
+footer div a img {
+  width: 30px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+
+.makeupContainer {
+  text-align: center;
+  padding: 20px;
+}
+
+.intro {
+  padding: 15px;
+}
+
+.makeupContainer ul {
+  list-style: none;
+}
+
+.publication_makeup_steps {
+  display: flex;
+  justify-content: center;
+}
+
+.create-product{
+  display: flex;
+  justify-content: center;
+}
+
+.form-create-product{
+  width: 50%;
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  margin: auto;
+}
+
+.see-more{
+  text-align: center;
+}
+.createProductTitle{
+  text-align: center;
+}
+
+.item-detail-container{
+  background-color: #DEDEDE;
+}
+
+.title-detail-container{
+  text-align: center;
+}
+
+.img-detail-container{
+  width: 400px;
+}
+
+.display-detail-container{display: flex;}
+
+
+.display-right-detail-container{
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+}
