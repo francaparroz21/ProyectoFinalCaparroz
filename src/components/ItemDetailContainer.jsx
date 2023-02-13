@@ -23,7 +23,7 @@ export const ItemDetailContainer = () => {
     }, [id])
 
     const productNullQuery = ()=>{
-        if(data){
+        if(data.name){
             return (
                 <div className="item-detail-container container">
                 <h3 className="title-detail-container">{data.name}</h3>
