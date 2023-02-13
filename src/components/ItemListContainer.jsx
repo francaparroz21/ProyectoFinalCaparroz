@@ -17,7 +17,7 @@ export const ItemListContainer = () => {
     const [products, setProducts] = useState([])
 
     //Funcion para printear cuando se ingresa un categoryId distinto
-    const categoryNotFound = () => {
+    const categoryNullQuery = () => {
         if(products.length !== 0) return <ItemList products={products}/>
         else return <h2>404. Category not found.</h2>
     }
@@ -45,8 +45,7 @@ export const ItemListContainer = () => {
                 </Link>
             </div>
             <div>
-                {categoryNotFound()}
-
+                {categoryNullQuery()}
             </div>
             <Footer />
         </>
