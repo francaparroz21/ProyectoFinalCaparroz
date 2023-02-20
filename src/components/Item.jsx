@@ -1,8 +1,22 @@
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 export const Item = ({ product }) => {
+    const [cart,setCart] = useContext(CartContext)
+
+    const {productRepeated} = useContext(CartContext)
+
+    const addToCart = ()=>{
+        setCart((items)=>{
+            if(productRepeated)return items.map((item)=>{
+                if(item.id === id)return {...item}
+            })
+        })
+    }
+
     return (
         <Card style={{ width: '18rem' }}>
             <Card.Img variant="top" src={product.urlImg} />

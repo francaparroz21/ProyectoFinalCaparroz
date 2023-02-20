@@ -1,7 +1,15 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 import CartWidget from "./CartWidget"
 
 export const Navbar = () => {
+    const [cart,setCart] = useContext(CartContext)
+
+    const quantity = cart.reduce((acc,item)=>{
+        return acc + item.quantity
+    })
+
     return (
         <header>
             <nav className="navbar navbar-expand-md">
