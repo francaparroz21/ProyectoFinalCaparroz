@@ -5,11 +5,10 @@ import { CartContext } from "../context/CartContext";
 
 const CartWidget = (props)=>{
     
-    const {getQuantity} = useContext(CartContext)
 
     return (
         <div className="cart-widget">
-            <a aria-controls={props.ariacontrols} data-bs-target={props.target} data-bs-toggle={props.toggle} type={props.type} id={props.id} href={props.route}><img src={process.env.PUBLIC_URL + "/images/" +props.routeImg} alt={props.alt} /><div className="countCart"><span>{getQuantity()}</span></div></a>
+            <a aria-controls={props.ariacontrols} data-bs-target={props.target} data-bs-toggle={props.toggle} type={props.type} id={props.id} href={props.route}><img src={process.env.PUBLIC_URL + "/images/" +props.routeImg} alt={props.alt} /><div className="countCart"><span>{}</span></div></a>
         </div>
     )
 }

@@ -6,10 +6,14 @@ import { Navbar } from "./Navbar";
 import { ItemCount } from "./ItemCount";
 import { Button } from "react-bootstrap";
 import { Footer } from "./Footer";
+import { useCartContext } from "../context/CartContext";
+
 
 
 
 export const ItemDetailContainer = () => {
+
+    const {addProduct} = useCartContext()
 
     //Hook useState item
     const [data, setData] = useState({});
@@ -35,7 +39,7 @@ export const ItemDetailContainer = () => {
                         <span>Stock disponible: {data.stock}</span>
                         <div className='add-tocart'>
                             <ItemCount stockProduct={data.stock} />
-                            <Button variant="success" title="Add to Cart" >Add to cart</Button>
+                            <Button onClick={addProduct(data)} variant="success" title="Add to Cart" >Add to cart</Button>
                         </div>
                     </div>
                 </div>

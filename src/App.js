@@ -8,8 +8,8 @@ import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
-    <CartProvider>
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      <CartProvider>
         <Routes>
           <Route path='/' element={<ItemListContainer />}></Route>
           <Route path='/category/:id' element={<ItemListContainer />}></Route>
@@ -17,8 +17,8 @@ function App() {
           <Route path='/item/:id' element={<ItemDetailContainer />}></Route>
           <Route path='/aboutme' element={<Aboutme />}></Route>
         </Routes>
-      </BrowserRouter>
-    </CartProvider>
+      </CartProvider>
+    </BrowserRouter>
   );
 }
 

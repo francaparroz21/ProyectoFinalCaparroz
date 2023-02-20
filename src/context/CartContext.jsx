@@ -1,47 +1,45 @@
-import { useState,createContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
-//Context
-export const CartContext = createContext()
+//Create context
+export const CartContext = React.createContext([])
+
+//Use context
+export const useCartContext = () => useContext(CartContext);
+
 
 //Provider
 export const CartProvider = ({ children }) => {
+
     //Estado de los productos
     const [cart, setCart] = useState([])
 
-    function getQuantity() {
-        const newList = [...cart]
-        return newList.lenght
-    }
+
+
+    //Function para limpiar el carrito
+    const clearCart = () => setCart([])
+
+    //Function para eliminar un producto por su id
+    const deleteProduct = (id) => setCart(cart.filter(element => element.id !== id))
 
     //Function booleana para saber si el producto esta repetido por su id
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
 
     //Function para agregar un producto, falta mejorar el else.
-    const addProduct = (product) => {
-        if (!productRepeated(product.id)) {
-            const newProduct = { ...product, totalPrice: product.stock * product.price }
-            const newList = { ...cart }
-            newList.push(newProduct)
-            setCart(newList)
-        } else {
-            console.log("product already added")
-        }
+    const addProduct = (product, quantity) => {
+        const newCart = cart.filter(element => element.id !== product.id)
+        newCart.push({ ...product, quantity: quantity })
+        setCart(newCart)
+        console.log(cart)
     }
 
-    //Function para eliminar un producto por su id
-    const deleteProduct = (id) => {
-        const copy = [...cart]
-        const newList = copy.filter(element => element.id !== id)
-        setCart(newList)
-    }
-
-    //Function para limpiar el carrito
-    const clearCart = () => {
-        setCart([])
-    }
 
     return (
-        <CartContext.Provider value={{ cart, getQuantity, addProduct, deleteProduct, clearCart, productRepeated }}>
+        <CartContext.Provider value={{
+            clearCart,
+            deleteProduct,
+            productRepeated,
+            addProduct
+        }}>
             {children}
         </CartContext.Provider>
     )
