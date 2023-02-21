@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig/firebase";
-import { Navbar } from "./Navbar";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -53,7 +52,6 @@ export const Create = () => {
 
     return (
         <>
-            <Navbar />
             <Form className="form-create-product" onSubmit={postProduct}>
                 <h2 className="createProductTitle">Create a product</h2>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -77,15 +75,15 @@ export const Create = () => {
 
                 <Form.Group className="mb-3" controlId="formBasicCategory">
                     <Form.Label>Category</Form.Label>
-                    <Form.Select onChange={(e)=>{setCategory(e.target.value)}}>
+                    <Form.Select onChange={(e) => { setCategory(e.target.value) }}>
                         <option >Cosmetic</option>
                         <option >Makeup</option>
                     </Form.Select>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicImage">
-                <Form.Label>Upload Image</Form.Label>
-                <Form.Control onChange={(e) => setImg(e.target.files[0])} type="file" />
+                    <Form.Label>Upload Image</Form.Label>
+                    <Form.Control onChange={(e) => setImg(e.target.files[0])} type="file" />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">

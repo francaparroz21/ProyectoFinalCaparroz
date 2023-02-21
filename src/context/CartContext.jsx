@@ -1,4 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //Create context
 export const CartContext = React.createContext([])
@@ -14,6 +16,23 @@ export const CartProvider = ({ children }) => {
     const [cart, setCart] = useState([])
 
 
+    //Toast product added
+    const toastProductAdded = () => {
+        toast.success("Product added !", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    }
+
+    const toastProductRepeated = () => {
+        toast.error("Product already added !", {
+            position: toast.POSITION.TOP_RIGHT
+        });
+    }
+
+    //Function para obtener la cantidad de items a comprar para el CartWidget
+    const getProductsCount = () => {
+        return <span>{cart.length}</span>
+    }
 
     //Function para limpiar el carrito
     const clearCart = () => setCart([])
@@ -24,12 +43,14 @@ export const CartProvider = ({ children }) => {
     //Function booleana para saber si el producto esta repetido por su id
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
 
-    //Function para agregar un producto, falta mejorar el else.
+    //Function para agregar un producto.
     const addProduct = (product, quantity) => {
-        const newCart = cart.filter(element => element.id !== product.id)
-        newCart.push({ ...product, quantity: quantity })
-        setCart(newCart)
-        console.log(cart)
+        if (!productRepeated(product.id)) {
+            cart.push({ ...product, quantity: quantity })
+            toastProductAdded()
+        } else {
+            toastProductRepeated()
+        }
     }
 
 
@@ -38,9 +59,11 @@ export const CartProvider = ({ children }) => {
             clearCart,
             deleteProduct,
             productRepeated,
-            addProduct
+            addProduct,
+            getProductsCount
         }}>
             {children}
+            <ToastContainer />
         </CartContext.Provider>
     )
 }

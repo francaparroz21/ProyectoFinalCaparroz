@@ -1,4 +1,3 @@
-import { Navbar } from "./Navbar"
 import { getDocs, collection, where, query } from "firebase/firestore"
 import { db } from "../firebaseConfig/firebase"
 import { Footer } from "./Footer"
@@ -18,7 +17,7 @@ export const ItemListContainer = () => {
 
     //Funcion para printear cuando se ingresa un categoryId distinto
     const categoryNullQuery = () => {
-        if(products.length !== 0) return <ItemList products={products}/>
+        if (products.length !== 0) return <ItemList products={products} />
         else return <h2>404. Category not found.</h2>
     }
 
@@ -36,7 +35,6 @@ export const ItemListContainer = () => {
 
     return (
         <>
-            <Navbar />
             <div className="create-product">
                 <Link to={"/create"}>
                     <Button>

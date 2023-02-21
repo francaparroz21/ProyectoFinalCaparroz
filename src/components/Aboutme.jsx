@@ -1,10 +1,8 @@
 import { Footer } from "./Footer"
-import { Navbar } from "./Navbar"
 
 export const Aboutme = () => {
     return (
         <div>
-            <Navbar />
             <main className="main-home">
                 <section className="container">
                     <div className="intro">
