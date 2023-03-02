@@ -1,0 +1,55 @@
+.main-home {
+    font-family: 'Rubik', sans-serif;
+    background: linear-gradient(rgba(20, 7, 12, 0.75), rgba(20, 7, 12, 0.75)), url("https://firebasestorage.googleapis.com/v0/b/bossyapp-54cf2.appspot.com/o/backgroundHome%2Fbackground_eyebrow.PNG?alt=media&token=8ce410cc-d58b-4c64-b140-3ec0ea13bec4") no-repeat center center fixed;
+    color: var(--blanco);
+    background-size: cover;
+}
+
+.homeImages img {
+    width: 100%;
+    height: auto;
+}
+
+.homeImages {
+    display: grid;
+    grid-area: "makeupme makeupme makeupPhoto makeupPhoto"
+        "banner banner banner banner";
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+}
+
+.makeupMe {
+    grid-area: makeupme;
+    grid-column: 1/3;
+    grid-row: 1/3;
+}
+
+.makeupPhoto {
+    grid-area: makeupPhoto;
+    grid-column: 3/5;
+    grid-row: 1/3;
+}
+
+.banner {
+    grid-area: banner;
+    grid-column: 1/5;
+    grid-row: 3/5;
+}
+
+.makeupContainer {
+    text-align: center;
+    padding: 20px;
+}
+
+.intro {
+    padding: 15px;
+}
+
+.makeupContainer ul {
+    list-style: none;
+}
+
+.publication_makeup_steps {
+    display: flex;
+    justify-content: center;
+}

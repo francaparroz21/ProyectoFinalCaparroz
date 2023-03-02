@@ -1,12 +1,12 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Aboutme } from './components/Aboutme';
-import { Create } from './components/Create';
-import { ItemDetailContainer } from './components/ItemDetailContainer';
-import { ItemListContainer } from './components/ItemListContainer';
+import { Aboutme } from './components/aboutme/Aboutme';
+import { ItemDetailContainer } from './components/itemdetailcontainer/ItemDetailContainer';
+import { ItemListContainer } from './components/itemlistcontainer/ItemListContainer';
 import { CartProvider } from './context/CartContext';
-import { Navbar } from './components/Navbar';
-import { Cart } from './components/Cart';
+import { Navbar } from './components/navbar/Navbar';
+import { Cart } from './components/cart/Cart';
+import { Footer } from './components/footer/Footer';
 
 function App() {
   return (
@@ -16,11 +16,11 @@ function App() {
         <Routes>
           <Route path='/' element={<ItemListContainer />}></Route>
           <Route path='/category/:id' element={<ItemListContainer />}></Route>
-          <Route path='/create' element={<Create />}></Route>
           <Route path='/item/:id' element={<ItemDetailContainer />}></Route>
           <Route path='/aboutme' element={<Aboutme />}></Route>
           <Route path='/cart' element={<Cart/>}></Route>
         </Routes>
+        <Footer/>
       </CartProvider>
     </BrowserRouter>
   );

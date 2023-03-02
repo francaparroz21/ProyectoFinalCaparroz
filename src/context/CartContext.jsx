@@ -11,9 +11,17 @@ export const useCartContext = () => useContext(CartContext);
 
 //Provider
 export const CartProvider = ({ children }) => {
-
+    
+    const getCartInStorage = () =>{
+        if(localStorage.getItem("cart"))return JSON.parse(localStorage.getItem("cart"))
+        else return 0
+    }
     //Estado de los productos
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(getCartInStorage())
+
+    //Estado de la longitud del carrito
+    const [cartCount, setCartCount] = useState()
+
 
 
     //Toast product added
@@ -29,16 +37,19 @@ export const CartProvider = ({ children }) => {
         });
     }
 
-    //Function para obtener la cantidad de items a comprar para el CartWidget
-    const getProductsCount = () => {
-        return <span>{cart.length}</span>
+    //Function para limpiar el carrito
+    const clearCart = () => {
+        setCart([])
+        setCartCount(0)
+        localStorage.clear()
     }
 
-    //Function para limpiar el carrito
-    const clearCart = () => setCart([])
-
     //Function para eliminar un producto por su id
-    const deleteProduct = (id) => setCart(cart.filter(element => element.id !== id))
+    const deleteProduct = (id) => {
+        setCart(cart.filter(element => element.id !== id))
+        setCartCount(cartCount - 1)
+        localStorage.setItem("cart",JSON.stringify(cart))
+    }
 
     //Function booleana para saber si el producto esta repetido por su id
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
@@ -47,10 +58,13 @@ export const CartProvider = ({ children }) => {
     const addProduct = (product, quantity) => {
         if (!productRepeated(product.id)) {
             cart.push({ ...product, quantity: quantity })
+            setCartCount(cartCount + 1)
+            localStorage.setItem("cart",JSON.stringify(cart))
             toastProductAdded()
         } else {
             toastProductRepeated()
         }
+        console.log(cart)
     }
 
 
@@ -60,7 +74,7 @@ export const CartProvider = ({ children }) => {
             deleteProduct,
             productRepeated,
             addProduct,
-            getProductsCount
+            cartCount
         }}>
             {children}
             <ToastContainer />

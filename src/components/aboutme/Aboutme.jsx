@@ -1,4 +1,4 @@
-import { Footer } from "./Footer"
+import "./aboutme.css"
 
 export const Aboutme = () => {
     return (
@@ -53,7 +53,6 @@ export const Aboutme = () => {
                     </div>
                 </section>
             </main>
-            <Footer className="footer-home" />
         </div>
     )
 }

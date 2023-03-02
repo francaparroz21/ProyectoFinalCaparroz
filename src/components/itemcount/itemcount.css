@@ -1,0 +1,10 @@
+.item-count>* {
+    padding: 8px;
+}
+
+.add-tocart {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 5px;
+}

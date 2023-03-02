@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { useCartContext } from '../context/CartContext';
+import { useCartContext } from '../../context/CartContext';
+import "./itemcount.css"
 
 export const ItemCount = (props) => {
 

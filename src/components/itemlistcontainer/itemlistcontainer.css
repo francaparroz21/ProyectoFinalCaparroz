@@ -1,0 +1,19 @@
+.cardsContainer {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 15px;
+}
+
+.card-img-top {
+    width: auto;
+}
+
+.cardsContainer>div {
+    padding: 10px;
+}
+
+.see-more {
+    text-align: center;
+}

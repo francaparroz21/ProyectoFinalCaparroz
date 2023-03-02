@@ -1,0 +1,20 @@
+.item-detail-container{
+    background-color: #DEDEDE;
+  }
+  
+  .title-detail-container{
+    text-align: center;
+  }
+  
+  .img-detail-container{
+    width: 400px;
+  }
+  
+  .display-detail-container{display: flex;}
+  
+  
+  .display-right-detail-container{
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+  }

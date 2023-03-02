@@ -1,12 +1,10 @@
 import { getDocs, collection, where, query } from "firebase/firestore"
-import { db } from "../firebaseConfig/firebase"
-import { Footer } from "./Footer"
-import { Button } from "react-bootstrap"
-import { Link } from "react-router-dom"
+import { db } from "../../firebaseConfig/firebase"
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import "./itemlistcontainer.css"
 
-import { ItemList } from "./ItemList"
+import { ItemList } from "../itemlist/ItemList"
 
 export const ItemListContainer = () => {
 
@@ -14,12 +12,6 @@ export const ItemListContainer = () => {
     const { id } = useParams()
     //Hook useState
     const [products, setProducts] = useState([])
-
-    //Funcion para printear cuando se ingresa un categoryId distinto
-    const categoryNullQuery = () => {
-        if (products.length !== 0) return <ItemList products={products} />
-        else return <h2>404. Category not found.</h2>
-    }
 
 
     useEffect(() => {
@@ -35,17 +27,9 @@ export const ItemListContainer = () => {
 
     return (
         <>
-            <div className="create-product">
-                <Link to={"/create"}>
-                    <Button>
-                        Create a product.
-                    </Button>
-                </Link>
-            </div>
             <div>
-                {categoryNullQuery()}
+                <ItemList products={products} />
             </div>
-            <Footer />
         </>
     )
 }

@@ -1,3 +1,5 @@
+import "./footer.css"
+
 export const Footer = (props) =>{
     const urlImgs = ["email_logo.png","logo_instagram.jpg","facebook_logo.png"]
 
