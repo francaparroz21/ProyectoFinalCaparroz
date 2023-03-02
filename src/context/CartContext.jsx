@@ -11,16 +11,12 @@ export const useCartContext = () => useContext(CartContext);
 
 //Provider
 export const CartProvider = ({ children }) => {
-    
-    const getCartInStorage = () =>{
-        if(localStorage.getItem("cart"))return JSON.parse(localStorage.getItem("cart"))
-        else return 0
-    }
+
     //Estado de los productos
-    const [cart, setCart] = useState(getCartInStorage())
+    const [cart, setCart] = useState([])
 
     //Estado de la longitud del carrito
-    const [cartCount, setCartCount] = useState()
+    const [cartCount, setCartCount] = useState(0)
 
 
 
@@ -64,7 +60,6 @@ export const CartProvider = ({ children }) => {
         } else {
             toastProductRepeated()
         }
-        console.log(cart)
     }
 
 
@@ -74,7 +69,8 @@ export const CartProvider = ({ children }) => {
             deleteProduct,
             productRepeated,
             addProduct,
-            cartCount
+            cartCount,
+            cart
         }}>
             {children}
             <ToastContainer />

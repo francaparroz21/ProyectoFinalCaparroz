@@ -1,0 +1,12 @@
+.cart{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-cart{
+    border: 1px solid black;
+    display: flex;
+    height: 200px;
+    width: 800px;
+    margin: auto;
+}
