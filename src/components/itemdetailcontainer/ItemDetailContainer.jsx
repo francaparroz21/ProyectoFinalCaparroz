@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebaseConfig/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { ItemCount } from "../itemcount/ItemCount";
-
-import { Link } from "react-router-dom";
 import "./itemdetailcontainer.css"
 
 export const ItemDetailContainer = () => {
@@ -38,7 +36,6 @@ export const ItemDetailContainer = () => {
                     </div>
                 </div>
             </div>
-            <Link to="../../cart">aca</Link>
         </>
     )
 }

@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ItemCount } from "../components/itemcount/ItemCount";
+import "./cartcontext.css"
 
 //Create context
 export const CartContext = React.createContext([])
@@ -44,19 +46,28 @@ export const CartProvider = ({ children }) => {
     const deleteProduct = (id) => {
         setCart(cart.filter(element => element.id !== id))
         setCartCount(cartCount - 1)
-        localStorage.setItem("cart",JSON.stringify(cart))
+        localStorage.setItem("cart", JSON.stringify(cart))
     }
 
     //Function booleana para saber si el producto esta repetido por su id
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
+
 
     //Function para agregar un producto.
     const addProduct = (product, quantity) => {
         if (!productRepeated(product.id)) {
             cart.push({ ...product, quantity: quantity })
             setCartCount(cartCount + 1)
-            localStorage.setItem("cart",JSON.stringify(cart))
             toastProductAdded()
+
+            console.log(product)
+
+            const div = document.createElement("div")
+            div.innerHTML = `<h4 class='nameInOffCanvas'>${product.name}</h4>
+            <img class="imgInOffcanvas" src=${product.urlImg} alt="" />
+            <p>${product.description}</p>`
+            //Agregamos el producto a la ventana del cart
+            document.getElementById("cartProductsContainer").append(div)
         } else {
             toastProductRepeated()
         }
