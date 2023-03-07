@@ -1,8 +1,14 @@
 .imgInOffcanvas{
-    width: 300px;
-    margin: auto;
+    width: 250px;
 }
 
 .nameInOffCanvas{
     text-align: center;
+}
+
+.display-offcanvas-product{
+    display: flex;
+}
+.itemcount-offcanvas{
+    margin: auto;
 }

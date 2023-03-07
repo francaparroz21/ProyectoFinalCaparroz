@@ -1,17 +1,18 @@
 import { getDocs, collection, where, query } from "firebase/firestore"
 import { db } from "../../firebaseConfig/firebase"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 import "./itemlistcontainer.css"
 
 import { ItemList } from "../itemlist/ItemList"
+import { useCartContext } from "../../context/CartContext"
 
 export const ItemListContainer = () => {
 
     //Params category id
     const { id } = useParams()
-    //Hook useState
-    const [products, setProducts] = useState([])
+
+    const { products, getProducts, setProducts, loading, functionLoading } = useCartContext();
 
 
     useEffect(() => {
@@ -19,16 +20,18 @@ export const ItemListContainer = () => {
         if (id) {
             const filter = query(productsCollection, where("category", "==", id))
             getDocs(filter).then(res => setProducts(res.docs.map(product => ({ id: product.id, ...product.data() }))))
-        } else {
-            getDocs(productsCollection).then(res => setProducts(res.docs.map(product => ({ id: product.id, ...product.data() }))))
-        }
-    }, [id])
+        } else { getProducts() }
+        functionLoading()
+    }, [id, functionLoading, setProducts, getProducts])
 
 
     return (
         <>
             <div>
-                <ItemList products={products} />
+                {loading ?
+                    <ItemList products={products} />
+                    : <span>Loading...</span>
+                }
             </div>
         </>
     )
