@@ -38,8 +38,12 @@ export const CartProvider = ({ children }) => {
     //Estado para la carga de la pagina.
     const [loading, setLoading] = useState(false)
 
+
     //funcion que devuelve el total de la compra en el carrito.
     const totalPriceProducts = () => cart.reduce((acc, product) => acc + product.quantity * product.price, 0)
+
+    //Estado del total de la compra
+    const [totalBuy, setTotalBuy] = useState(totalPriceProducts())
 
     //Funcion que nos dice el total de cantidad de productos.
     const totalCountProducts = () => cart.reduce((acc) => acc + 1, 0)
@@ -72,9 +76,11 @@ export const CartProvider = ({ children }) => {
 
     //Function para limpiar el carrito
     const clearCart = () => {
-        setCart([])
+        const cartEmpty = []
+        localStorage.setItem("cart", JSON.stringify(cartEmpty))
+        setCart(cartEmpty)
         setCartCount(0)
-        localStorage.setItem("cart",JSON.stringify(cart))
+        setTotalBuy(0)
     }
 
     //Function para calcular el precio total por un tipo de producto (quantity * price)
@@ -82,10 +88,12 @@ export const CartProvider = ({ children }) => {
 
     //Function para eliminar un producto por su id
     const deleteProduct = (id) => {
-        let cartFiltered = cart.filter(product => product.id !== id) 
+        let cartFiltered = cart.filter(product => product.id !== id)
+        let productFounded = cart.find(product => product.id === id)
         setCart(cartFiltered)
         saveCartToStorage(cartFiltered)
         setCartCount(cartCount - 1)
+        setTotalBuy(totalBuy - (productFounded.quantity * productFounded.price))
     }
 
     //Function booleana para saber si el producto esta repetido por su id
@@ -141,7 +149,8 @@ export const CartProvider = ({ children }) => {
             getProducts,
             totalPriceProducts,
             totalCountProducts,
-            totalProductPrice
+            totalProductPrice,
+            totalBuy, setTotalBuy
         }}>
             {children}
             <ToastContainer />

@@ -6,18 +6,22 @@ import "./cartitem.css"
 export const CartItem = ({ product }) => {
     const [count, setCount] = useState(product.quantity)
 
-    const { deleteProduct, totalProductPrice } = useCartContext()
+    const { deleteProduct, totalProductPrice,totalBuy, setTotalBuy } = useCartContext()
 
     const [totalPrice, setTotalPrice] = useState(totalProductPrice(product))
 
     const onClickDecrease = () => {
         setCount(count - 1)
-        setTotalPrice(totalPrice - (product.price))
+        setTotalPrice(totalPrice - product.price)
+        setTotalBuy(totalBuy - product.price)
+        product.quantity--
     }
 
     const onClickIncrease = () => {
         setCount(count + 1)
-        setTotalPrice(totalPrice + (product.price))
+        setTotalPrice(totalPrice + product.price)
+        setTotalBuy(totalBuy + product.price)
+        product.quantity++
     }
 
     return (
@@ -27,7 +31,7 @@ export const CartItem = ({ product }) => {
                 <h4 className="productTitle">{product.name}</h4>
                 <p>{product.description}</p>
                 <div className="quantity-price-display">
-                    <span>Quantity: {product.quantity}</span>
+                    <span>Quantity: {count}</span>
                     <span>Price: {totalPrice}</span>
                 </div>
                 <div className="displayCountInCart">
