@@ -74,14 +74,18 @@ export const CartProvider = ({ children }) => {
     const clearCart = () => {
         setCart([])
         setCartCount(0)
-        localStorage.clear()
+        localStorage.setItem("cart",JSON.stringify(cart))
     }
+
+    //Function para calcular el precio total por un tipo de producto (quantity * price)
+    const totalProductPrice = (product) => product.price * product.quantity
 
     //Function para eliminar un producto por su id
     const deleteProduct = (id) => {
-        setCart(cart.filter(element => element.id !== id))
+        let cartFiltered = cart.filter(product => product.id !== id) 
+        setCart(cartFiltered)
+        saveCartToStorage(cartFiltered)
         setCartCount(cartCount - 1)
-        localStorage.setItem("cart", JSON.stringify(cart))
     }
 
     //Function booleana para saber si el producto esta repetido por su id
@@ -100,6 +104,11 @@ export const CartProvider = ({ children }) => {
             <p>${product.description}</p>`
         //Agregamos el producto a la ventana del cart
         document.getElementById("cartProductsContainer").append(div)
+    }
+
+    //Funcion para guardar carrito
+    const saveCartToStorage = (cart) => {
+        localStorage.setItem("cart", JSON.stringify(cart))
     }
 
     //Function para agregar un producto.
@@ -131,7 +140,8 @@ export const CartProvider = ({ children }) => {
             setProducts,
             getProducts,
             totalPriceProducts,
-            totalCountProducts
+            totalCountProducts,
+            totalProductPrice
         }}>
             {children}
             <ToastContainer />

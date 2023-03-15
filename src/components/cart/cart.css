@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.finalBuy{
+    margin: auto;
+}
+
 .item-cart{
     border: 1px solid black;
     display: flex;
