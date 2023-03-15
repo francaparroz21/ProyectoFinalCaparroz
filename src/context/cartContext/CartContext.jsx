@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./cartcontext.css"
-import { db } from "../firebaseConfig/firebase";
-import { getDocs,collection } from "firebase/firestore";
+import { db } from "../../firebaseConfig/firebase";
+import { getDocs, collection } from "firebase/firestore";
 
 //Create context
 export const CartContext = React.createContext([])
@@ -15,17 +15,34 @@ export const useCartContext = () => useContext(CartContext);
 //Provider
 export const CartProvider = ({ children }) => {
 
+    //Funcion para obtener carrito del storage
+    const getCartToStorage = () => {
+        if (localStorage.getItem("cart")) return JSON.parse(localStorage.getItem("cart"))
+        return []
+    }
+
     //Estado de los productos
-    const [cart, setCart] = useState([])
+    const [cart, setCart] = useState(getCartToStorage())
 
     //Estado de los productos en firebase
     const [products, setProducts] = useState()
 
+    //Funcion para obtener carrito del storage
+    const getCartCount = () => {
+        return cart.lenght
+    }
+
     //Estado de la longitud del carrito
-    const [cartCount, setCartCount] = useState(0)
+    const [cartCount, setCartCount] = useState([getCartCount()])
 
     //Estado para la carga de la pagina.
     const [loading, setLoading] = useState(false)
+
+    //funcion que devuelve el total de la compra en el carrito.
+    const totalPriceProducts = () => cart.reduce((acc, product) => acc + product.quantity * product.price, 0)
+
+    //Funcion que nos dice el total de cantidad de productos.
+    const totalCountProducts = () => cart.reduce((acc) => acc + 1, 0)
 
     //Toast product added
     const toastProductAdded = () => {
@@ -41,7 +58,7 @@ export const CartProvider = ({ children }) => {
     }
 
     //Funcion que retorna todos los productos en firebase.
-    const getProducts = ()=>{
+    const getProducts = () => {
         const productsCollection = collection(db, "bossyProducts")
         getDocs(productsCollection).then(res => setProducts(res.docs.map(product => ({ id: product.id, ...product.data() }))))
     }
@@ -50,7 +67,7 @@ export const CartProvider = ({ children }) => {
     const functionLoading = () => {
         setTimeout(() => {
             setLoading(true)
-        },3000)
+        }, 3000)
     }
 
     //Function para limpiar el carrito
@@ -71,28 +88,29 @@ export const CartProvider = ({ children }) => {
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
 
     //Function que printea en el offcanvas
-    const printInOffcanvas = (product) =>{
+    const printInOffcanvas = (product, quantity) => {
         const div = document.createElement("div")
-            div.innerHTML = `<h4 class='nameInOffCanvas'>${product.name}</h4>
+        div.innerHTML = `<h4 class='nameInOffCanvas'>${product.name}</h4>
             <div class='display-offcanvas-product'>
             <img class="imgInOffcanvas" src=${product.urlImg} alt="" />
             <div class='itemcount-offcanvas'>
-            <span>Price: ${product.name}</span><button class='btn btn-danger'>-</button>${quantity}<button class='btn btn-success'>+</button>
+            <span>Price: ${product.price}</span><button class='btn btn-danger'>-</button>${quantity}<button class='btn btn-success'>+</button>
             </div>
              </div>
             <p>${product.description}</p>`
-            //Agregamos el producto a la ventana del cart
-            document.getElementById("cartProductsContainer").append(div)
+        //Agregamos el producto a la ventana del cart
+        document.getElementById("cartProductsContainer").append(div)
     }
 
     //Function para agregar un producto.
     const addProduct = (product, quantity) => {
         if (!productRepeated(product.id)) {
             cart.push({ ...product, quantity: quantity })
+            localStorage.setItem("cart", JSON.stringify(cart))
             setCartCount(cartCount + 1)
             toastProductAdded()
 
-            printInOffcanvas(product)
+            printInOffcanvas(product, quantity)
         } else {
             toastProductRepeated()
         }
@@ -111,7 +129,9 @@ export const CartProvider = ({ children }) => {
             functionLoading,
             products,
             setProducts,
-            getProducts
+            getProducts,
+            totalPriceProducts,
+            totalCountProducts
         }}>
             {children}
             <ToastContainer />

@@ -12,7 +12,7 @@ const firebaseConfig = {
   projectId: "bossyapp-54cf2",
   storageBucket: "bossyapp-54cf2.appspot.com",
   messagingSenderId: "278105150759",
-  appId: "1:278105150759:web:76ffac3e442b0f5f634502",
+  appId: "1:278105150759:web:76ffac3e442b0f5f634502"
 };
 
 // Initialize Firebase

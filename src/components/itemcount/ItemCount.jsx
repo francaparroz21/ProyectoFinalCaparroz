@@ -1,12 +1,10 @@
-import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
-import { useCartContext } from '../../context/CartContext';
 import "./itemcount.css"
+import { useState } from 'react';
 
 export const ItemCount = (props) => {
 
-    const [count, setCount] = useState(1);
-    const { addProduct } = useCartContext()
+    const [count, setCount] = useState(props.count);
 
     const increase = () => {
         setCount(count + 1)
@@ -24,7 +22,7 @@ export const ItemCount = (props) => {
                 <span>{count}</span>
                 <Button disabled={count >= props.stockProduct} variant="outline-primary" title="+" onClick={() => increase()}>+</Button>
             </div>
-            <Button onClick={() => addProduct(props.data,count)} variant="success" title="Add to Cart" >Add to cart</Button>
+            <Button onClick={() => props.onAdd(count)} variant="success" title="Add to Cart" >Add to cart</Button>
         </div>
     )
 }

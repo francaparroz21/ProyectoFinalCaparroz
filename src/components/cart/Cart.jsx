@@ -1,5 +1,6 @@
-import { useCartContext } from "../../context/CartContext"
+import { useCartContext } from "../../context/cartContext/CartContext"
 import "./cart.css"
+import { CartItem } from "../cartitem/CartItem"
 
 export const Cart = () => {
 
@@ -9,13 +10,8 @@ export const Cart = () => {
         <div className="cart container">
             {cart.map((product) => {
                 return (
-                    <div className="item-cart">
-                        <img src={product.urlImg} alt="" />
-                        <div>
-                            <h4>{product.name}</h4>
-                            <p>{product.description}</p>
-                            <span>Quantity: {product.quantity}</span>
-                        </div>
+                    <div key={product.id} className="item-cart">
+                        <CartItem product={product}/>
                     </div>
                 );
             })}

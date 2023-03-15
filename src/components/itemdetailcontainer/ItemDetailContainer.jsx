@@ -4,6 +4,7 @@ import { db } from "../../firebaseConfig/firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { ItemCount } from "../itemcount/ItemCount";
 import "./itemdetailcontainer.css"
+import { useCartContext } from "../../context/cartContext/CartContext";
 
 export const ItemDetailContainer = () => {
 
@@ -11,6 +12,15 @@ export const ItemDetailContainer = () => {
     const [data, setData] = useState({});
     // useParams /item/:id
     const { id } = useParams()
+
+    //Add product del cart context
+    const { addProduct } = useCartContext()
+
+
+    //para que pase un valor (callback) el item count.
+    const onAdd = (quantity) =>{
+        addProduct(data,quantity)
+    }
 
     useEffect(() => {
         const docRef = doc(db, "bossyProducts", id)
@@ -31,7 +41,7 @@ export const ItemDetailContainer = () => {
                         <p>{data.description}</p>
                         <span>Stock disponible: {data.stock}</span>
                         <div className='add-tocart'>
-                            <ItemCount data={data} stockProduct={data.stock} />
+                            <ItemCount count={1} onAdd={onAdd} data={data} stockProduct={data.stock} />
                         </div>
                     </div>
                 </div>

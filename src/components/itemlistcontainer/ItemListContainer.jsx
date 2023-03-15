@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import "./itemlistcontainer.css"
 
 import { ItemList } from "../itemlist/ItemList"
-import { useCartContext } from "../../context/CartContext"
+import { useCartContext } from "../../context/cartContext/CartContext"
 
 export const ItemListContainer = () => {
 

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Aboutme } from './components/aboutme/Aboutme';
 import { ItemDetailContainer } from './components/itemdetailcontainer/ItemDetailContainer';
 import { ItemListContainer } from './components/itemlistcontainer/ItemListContainer';
-import { CartProvider } from './context/CartContext';
+import { CartProvider } from './context/cartContext/CartContext';
 import { Navbar } from './components/navbar/Navbar';
 import { Cart } from './components/cart/Cart';
 import { Footer } from './components/footer/Footer';

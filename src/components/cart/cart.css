@@ -10,3 +10,11 @@
     width: 800px;
     margin: auto;
 }
+
+.imgInCart{
+    width: 200px;
+}
+
+.productTitle{
+    text-align: center;
+}
