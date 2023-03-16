@@ -9,18 +9,28 @@ export const Checkout = () => {
 
     const { cart, totalBuy } = useCartContext()
 
-    const [form, setForm] = useState()
+    const [form, setForm] = useState([])
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
 
     const order = {
-        buyer: form,
-        items: cart.map (product => ({id: product.id, name: product.name, price: product.price, quantity: product.quantity})),
+        buyer: {
+            name: form.name,
+            email: form.email
+        },
+        items: cart.map(product => ({ id: product.id, name: product.name, price: product.price, quantity: product.quantity })),
         total: totalBuy
     }
 
-    const submitOrder = () =>{
+    const submitOrder = () => {
         const db = getFirestore()
-        const ordersCollection = collection(db,"bossyOrders")
-        addDoc(ordersCollection,order)
+        const ordersCollection = collection(db, "orders")
+        addDoc(ordersCollection, order)
     }
 
 
@@ -45,14 +55,14 @@ export const Checkout = () => {
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicName">
                             <Form.Label>Name</Form.Label>
-                            <Form.Control onChange={(e) => setForm({...form, name: e.target.value})} type="text" placeholder="Enter your name." />
+                            <Form.Control name="name" onChange={(e) => handleChange(e)} type="text" placeholder="Enter your name." />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
-                            <Form.Control onChange={(e) => setForm({...form, email: e.target.value})} type="email" placeholder="Enter email." />
+                            <Form.Control name="email" onChange={(e) => handleChange(e)} type="email" placeholder="Enter email." />
                         </Form.Group>
 
-                        <Button onClick={()=> submitOrder()} variant="primary" type="submit">
+                        <Button onClick={() => submitOrder()} variant="primary" type="submit">
                             Submit
                         </Button>
                     </Form>

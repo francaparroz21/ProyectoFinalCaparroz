@@ -148,6 +148,7 @@ export const CartProvider = ({ children }) => {
             cart.push({ ...product, quantity: quantity })
             localStorage.setItem("cart", JSON.stringify(cart))
             setCartCount(cartCount + 1)
+            setTotalBuy(totalBuy + product.price)
             toastProductAdded()
 
         } else {
