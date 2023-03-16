@@ -7,12 +7,13 @@ import {getStorage} from "firebase/storage"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAfJTpHXiSGmPXRBFt0mg6W4m34pFumaOs",
-  authDomain: "bossy-2c5bb.firebaseapp.com",
-  projectId: "bossy-2c5bb",
-  storageBucket: "bossy-2c5bb.appspot.com",
-  messagingSenderId: "825768290360",
-  appId: "1:825768290360:web:0547ce9916911e97641ecd"
+  apiKey: "AIzaSyDT1NCfWA8Y-z98JPjebyS2hAQ-nj3b5W4",
+  authDomain: "bossyapp-54cf2.firebaseapp.com",
+  databaseURL: "https://bossyapp-54cf2-default-rtdb.firebaseio.com",
+  projectId: "bossyapp-54cf2",
+  storageBucket: "bossyapp-54cf2.appspot.com",
+  messagingSenderId: "278105150759",
+  appId: "1:278105150759:web:76ffac3e442b0f5f634502"
 };
 
 // Initialize Firebase

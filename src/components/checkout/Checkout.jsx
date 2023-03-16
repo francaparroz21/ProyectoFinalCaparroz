@@ -2,12 +2,16 @@ import { useCartContext } from "../../context/cartContext/CartContext"
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import "./checkout.css"
-import { collection, addDoc, getFirestore } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../../firebaseConfig/firebase";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Checkout = () => {
 
-    const { cart, totalBuy } = useCartContext()
+    const navigate = useNavigate()
+
+    const { cart, totalBuy, finishBuy } = useCartContext()
 
     const [form, setForm] = useState([])
 
@@ -24,13 +28,18 @@ export const Checkout = () => {
             email: form.email
         },
         items: cart.map(product => ({ id: product.id, name: product.name, price: product.price, quantity: product.quantity })),
-        total: totalBuy
+        total: totalBuy,
     }
 
     const submitOrder = () => {
-        const db = getFirestore()
-        const ordersCollection = collection(db, "orders")
+        //Collection reference
+        const ordersCollection = collection(db, "bossyOrders")
         addDoc(ordersCollection, order)
+            .then(({ id }) => console.log(id))
+        finishBuy()
+        setTimeout(() => {
+            navigate("/")
+        }, 3000)
     }
 
 
@@ -62,7 +71,7 @@ export const Checkout = () => {
                             <Form.Control name="email" onChange={(e) => handleChange(e)} type="email" placeholder="Enter email." />
                         </Form.Group>
 
-                        <Button onClick={() => submitOrder()} variant="primary" type="submit">
+                        <Button onClick={() => submitOrder()} variant="primary">
                             Submit
                         </Button>
                     </Form>

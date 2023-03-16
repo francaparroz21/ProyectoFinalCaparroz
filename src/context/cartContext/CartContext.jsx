@@ -38,6 +38,7 @@ export const CartProvider = ({ children }) => {
         return cart.lenght
     }
 
+
     //Estado de la longitud del carrito
     const [cartCount, setCartCount] = useState([getCartCount()])
 
@@ -120,6 +121,15 @@ export const CartProvider = ({ children }) => {
         setTotalBuy(totalBuy - (productFounded.quantity * productFounded.price))
     }
 
+    const finishBuy = () =>{
+        Swal.fire({
+            icon: 'success',
+            title: 'Your order has been shipped',
+            showConfirmButton: false,
+            timer: 2000
+          })
+    }
+
     //Function para comprar todos los productos y llevar a componente checkout.
     const buyProducts = () => {
         Swal.fire({
@@ -177,6 +187,7 @@ export const CartProvider = ({ children }) => {
             buyProducts,
             navigate,
             saveCartToStorage,
+            finishBuy
         }}>
             {children}
             <ToastContainer />
