@@ -5,13 +5,12 @@ import { Button } from "react-bootstrap"
 
 export const Cart = () => {
 
-    const { cart, clearCart, totalBuy } = useCartContext()
+    const { cart, clearCart, totalBuy, buyProducts } = useCartContext()
 
     const isEmpty = (cart) => {
         if (cart.length === 0) return true
         return false
     }
-    console.log(cart)
 
     return (<>
         {isEmpty(cart) ?
@@ -36,7 +35,7 @@ export const Cart = () => {
                 <span className="totalBuy">Total Buy: {totalBuy}</span>
                 <div className="buttonsBuy">
                     <Button onClick={() => clearCart()} className="btn btn-danger">Delete all products.</Button>
-                    <Button className="btn btn-success">Buy products.</Button>
+                    <Button onClick={() => buyProducts()} className="btn btn-success">Buy products.</Button>
                 </div>
             </div>
 

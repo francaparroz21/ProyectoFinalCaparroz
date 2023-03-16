@@ -25,8 +25,7 @@ export const Navbar = () => {
                 </button>
                 <div className="navbar-right">
                     <div>
-                        <CartWidget id='cartIconToggle' type="button" toggle="offcanvas" target="#offcanvasWithBackdrop"
-                            ariacontrols="offcanvasWithBackdrop" routeImg="trolley-cart.png" />
+                        <CartWidget type="button" routeImg="trolley-cart.png" />
                     </div>
                 </div>
             </nav>

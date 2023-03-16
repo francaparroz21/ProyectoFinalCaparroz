@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./cartcontext.css"
 import { db } from "../../firebaseConfig/firebase";
 import { getDocs, collection } from "firebase/firestore";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 //Create context
 export const CartContext = React.createContext([])
@@ -12,8 +14,12 @@ export const CartContext = React.createContext([])
 export const useCartContext = () => useContext(CartContext);
 
 
+
 //Provider
 export const CartProvider = ({ children }) => {
+
+    //Use Navigate
+    const navigate = useNavigate()
 
     //Funcion para obtener carrito del storage
     const getCartToStorage = () => {
@@ -74,13 +80,31 @@ export const CartProvider = ({ children }) => {
         }, 3000)
     }
 
+
     //Function para limpiar el carrito
     const clearCart = () => {
-        const cartEmpty = []
-        localStorage.setItem("cart", JSON.stringify(cartEmpty))
-        setCart(cartEmpty)
-        setCartCount(0)
-        setTotalBuy(0)
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are going to clear all products!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete.'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const cartEmpty = []
+                localStorage.setItem("cart", JSON.stringify(cartEmpty))
+                setCart(cartEmpty)
+                setCartCount(0)
+                setTotalBuy(0)
+                Swal.fire(
+                    'The products are deleted.',
+                    'Your cart is cleared.',
+                    'success'
+                )
+            }
+        })
     }
 
     //Function para calcular el precio total por un tipo de producto (quantity * price)
@@ -96,23 +120,22 @@ export const CartProvider = ({ children }) => {
         setTotalBuy(totalBuy - (productFounded.quantity * productFounded.price))
     }
 
+    //Function para comprar todos los productos y llevar a componente checkout.
+    const buyProducts = () => {
+        Swal.fire({
+            title: 'You want to finish the purchase order?',
+            showDenyButton: true,
+            confirmButtonText: 'Yes.',
+            denyButtonText: `No.`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                navigate("/checkout")
+            }
+        })
+    }
+
     //Function booleana para saber si el producto esta repetido por su id
     const productRepeated = (id) => cart.find(element => element.id === id) ? true : false
-
-    //Function que printea en el offcanvas
-    const printInOffcanvas = (product, quantity) => {
-        const div = document.createElement("div")
-        div.innerHTML = `<h4 class='nameInOffCanvas'>${product.name}</h4>
-            <div class='display-offcanvas-product'>
-            <img class="imgInOffcanvas" src=${product.urlImg} alt="" />
-            <div class='itemcount-offcanvas'>
-            <span>Price: ${product.price}</span><button class='btn btn-danger'>-</button>${quantity}<button class='btn btn-success'>+</button>
-            </div>
-             </div>
-            <p>${product.description}</p>`
-        //Agregamos el producto a la ventana del cart
-        document.getElementById("cartProductsContainer").append(div)
-    }
 
     //Funcion para guardar carrito
     const saveCartToStorage = (cart) => {
@@ -127,12 +150,10 @@ export const CartProvider = ({ children }) => {
             setCartCount(cartCount + 1)
             toastProductAdded()
 
-            printInOffcanvas(product, quantity)
         } else {
             toastProductRepeated()
         }
     }
-
 
     return (
         <CartContext.Provider value={{
@@ -142,6 +163,7 @@ export const CartProvider = ({ children }) => {
             addProduct,
             cartCount,
             cart,
+            setCart,
             loading,
             functionLoading,
             products,
@@ -150,7 +172,10 @@ export const CartProvider = ({ children }) => {
             totalPriceProducts,
             totalCountProducts,
             totalProductPrice,
-            totalBuy, setTotalBuy
+            totalBuy, setTotalBuy,
+            buyProducts,
+            navigate,
+            saveCartToStorage,
         }}>
             {children}
             <ToastContainer />

@@ -1,0 +1,37 @@
+.detailBuy-title{
+    text-align: center;
+    padding: 10px;
+}
+
+.buyCheckout{
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+.productsInList{
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.productsInList > *{
+    text-align: center;
+}
+
+.productsInList > ul{
+    padding: 20px;
+}
+
+.totalPriceInCheckout{
+    display: flex;
+    justify-content: center;
+}
+
+.ticketTitle{
+    text-align: center;
+}
+
+.formOrderedBuy{
+    width: 400px;
+}

@@ -1,5 +1,6 @@
 import { ItemCount } from "../itemcount/ItemCount";
 import { useCartContext } from "../../context/cartContext/CartContext";
+import "./itemdetail.css"
 
 export const ItemDetail = ({ data }) => {
 
@@ -12,7 +13,7 @@ export const ItemDetail = ({ data }) => {
     }
     return (
         <>
-            <div className="item-detail-container container">
+            <div className="item-detail-container container-fluid">
                 <h3 className="title-detail-container">{data.name}</h3>
 
                 <div className="display-detail-container">

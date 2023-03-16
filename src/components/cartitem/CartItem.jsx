@@ -6,15 +6,22 @@ import "./cartitem.css"
 export const CartItem = ({ product }) => {
     const [count, setCount] = useState(product.quantity)
 
-    const { deleteProduct, totalProductPrice,totalBuy, setTotalBuy } = useCartContext()
+    const { cart, saveCartToStorage, deleteProduct, totalProductPrice, totalBuy, setTotalBuy } = useCartContext()
 
     const [totalPrice, setTotalPrice] = useState(totalProductPrice(product))
+
+    const updateProductInCart = () =>{
+        const index = cart.indexOf(product)
+        cart.splice(index,1,product)
+        saveCartToStorage(cart)
+    }
 
     const onClickDecrease = () => {
         setCount(count - 1)
         setTotalPrice(totalPrice - product.price)
         setTotalBuy(totalBuy - product.price)
         product.quantity--
+        updateProductInCart()
     }
 
     const onClickIncrease = () => {
@@ -22,6 +29,7 @@ export const CartItem = ({ product }) => {
         setTotalPrice(totalPrice + product.price)
         setTotalBuy(totalBuy + product.price)
         product.quantity++
+        updateProductInCart()
     }
 
     return (
