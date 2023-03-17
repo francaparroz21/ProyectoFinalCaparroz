@@ -11,7 +11,7 @@ export const Checkout = () => {
 
     const navigate = useNavigate()
 
-    const { cart, totalBuy, finishBuy } = useCartContext()
+    const { cart, totalBuy, finishBuy, setCart, setCartCount, setTotalBuy } = useCartContext()
 
     const [form, setForm] = useState([])
 
@@ -37,6 +37,12 @@ export const Checkout = () => {
         addDoc(ordersCollection, order)
             .then(({ id }) => console.log(id))
         finishBuy()
+        const cartEmpty = []
+        localStorage.setItem("cart", JSON.stringify(cartEmpty))
+        setCart(cartEmpty)
+        setCartCount(0)
+        setTotalBuy(0)
+
         setTimeout(() => {
             navigate("/")
         }, 3000)
@@ -46,7 +52,6 @@ export const Checkout = () => {
     return (
         <>
             <h2 className="detailBuy-title">Detalle de la compra</h2>
-
             <div className="buyCheckout">
                 <div className="productsInList">
                     <h3 className="ticketTitle">Ticket</h3>
@@ -59,7 +64,6 @@ export const Checkout = () => {
                     </ul>
                     <span className="totalPriceInCheckout">Total Price: ${totalBuy}</span>
                 </div>
-
                 <div className="formOrderedBuy">
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicName">

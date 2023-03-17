@@ -187,7 +187,8 @@ export const CartProvider = ({ children }) => {
             buyProducts,
             navigate,
             saveCartToStorage,
-            finishBuy
+            finishBuy,
+            setCartCount
         }}>
             {children}
             <ToastContainer />
